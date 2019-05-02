@@ -7,11 +7,10 @@ import Aux from '../../../hoc/Aux';
 
 const sideDrawer = (props) =>{
 
-    //.....
     return(
         <Aux>
-            <Backdrop show/>
-            <div className='SideDrawer'>
+            <Backdrop show={props.open} clicked={props.closed}/>
+            <div className={props.open ? 'SideDrawer Open':'SideDrawer Close'}>
             {/* setting the height as a property for making responsive */}
                 <Logo height='11%'/>
                 <nav>
