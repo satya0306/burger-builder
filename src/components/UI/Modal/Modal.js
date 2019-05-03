@@ -16,4 +16,4 @@ const modal = (props) =>(
     </Aux>    
 );
 
-export default modal;
+export default modal; 
