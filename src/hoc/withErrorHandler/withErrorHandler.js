@@ -7,16 +7,24 @@ const withErrorHandler = (WrappedComponent, axios) =>{
         state ={
             error:null
         }
-
-        componentDidMount(){
-            axios.interceptors.request.use(req =>{
+        // for the post request componentDidMount works but for the get request for error
+        // handling we have to use componentWillMount because it execute befor the rendering
+        // all child component and show the error if any
+        componentWillMount(){
+            this.reqInterceptor = axios.interceptors.request.use(req =>{
                 this.setState({error:null});
                 return req;
             });
-            axios.interceptors.response.use(null, error =>{
+            this.resInterceptor = axios.interceptors.response.use(null, error =>{
                 this.setState({error:error});
             });
         }
+        //removing the interceptors because they run unnessesary and take the memory
+        // componentWillUnmount() {
+        //     axios.interceptor.request.eject(this.reqInterceptor);
+        //     axios.interceptor.response.eject(this.resInterceptor);
+        // }
+        
 
         errorConfirmedHandler =() =>{
             this.setState({error:null});
